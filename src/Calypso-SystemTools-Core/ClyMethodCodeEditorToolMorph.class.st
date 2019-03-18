@@ -110,14 +110,14 @@ ClyMethodCodeEditorToolMorph >> createCommandContextForCursorAt: aCursorPoint [
 	| sourceNode |
 	sourceNode := self findSourceNodeAt: aCursorPoint.
 	
-	^ClySourceCodeContext for: self selectedNode: sourceNode
+	^ClyMethodSourceCodeContext for: self selectedNode: sourceNode
 ]
 
 { #category : #contexts }
 ClyMethodCodeEditorToolMorph >> createTextContext [
 	^self selectedSourceNode
 		ifNil: [super createTextContext]
-		ifNotNil: [ :astNode | ClySourceCodeContext for: self selectedNode: astNode]
+		ifNotNil: [ :astNode | ClyMethodSourceCodeContext for: self selectedNode: astNode]
 ]
 
 { #category : #building }
@@ -283,11 +283,6 @@ ClyMethodCodeEditorToolMorph >> selectVariableNamed: varName [
 	self selectAnyVariable: { varName }
 ]
 
-{ #category : #'smart suggestions support' }
-ClyMethodCodeEditorToolMorph >> selectedMessage [
-	^editingMethod
-]
-
 { #category : #accessing }
 ClyMethodCodeEditorToolMorph >> selectedSourceNode [
 
@@ -315,11 +310,6 @@ ClyMethodCodeEditorToolMorph >> setUpParametersFromModel [
 ClyMethodCodeEditorToolMorph >> setUpTargetClasses [
 
 	targetClasses := browser chooseClassesForNewMethod: editingMethod
-]
-
-{ #category : #'smart suggestions support' }
-ClyMethodCodeEditorToolMorph >> sugsContext [
-	^ClySugsMethodContext model: self
 ]
 
 { #category : #operations }
